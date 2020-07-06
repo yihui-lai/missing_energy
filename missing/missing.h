@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Fri Jul  3 16:40:36 2020 by ROOT version 6.16/00
+// Mon Jul  6 14:48:08 2020 by ROOT version 6.16/00
 // from TTree tree/tree
-// found on file: pion_5GeV2.root
+// found on file: pion_5GeV.root
 //////////////////////////////////////////////////////////
 
 #ifndef missing_h
@@ -35,6 +35,7 @@ public :
    vector<int>     *primary_second_id;
    vector<float>   *primary_second_Ek;
    vector<float>   *primary_second_Et;
+   vector<float>   *primary_second_mass;
    Float_t         ParentEK1;
    Float_t         ParentEK2;
    Float_t         ParentEtot1;
@@ -172,6 +173,7 @@ public :
    TBranch        *b_primary_second_id;   //!
    TBranch        *b_primary_second_Ek;   //!
    TBranch        *b_primary_second_Et;   //!
+   TBranch        *b_primary_second_mass;   //!
    TBranch        *b_ParentEK1;   //!
    TBranch        *b_ParentEK2;   //!
    TBranch        *b_ParentEtot1;   //!
@@ -365,6 +367,7 @@ void missing::Init(TTree *tree)
    primary_second_id = 0;
    primary_second_Ek = 0;
    primary_second_Et = 0;
+   primary_second_mass = 0;
    inputInitialPosition = 0;
    inputMomentum = 0;
    primaryPosT1 = 0;
@@ -393,6 +396,7 @@ void missing::Init(TTree *tree)
    fChain->SetBranchAddress("primary_second_id", &primary_second_id, &b_primary_second_id);
    fChain->SetBranchAddress("primary_second_Ek", &primary_second_Ek, &b_primary_second_Ek);
    fChain->SetBranchAddress("primary_second_Et", &primary_second_Et, &b_primary_second_Et);
+   fChain->SetBranchAddress("primary_second_mass", &primary_second_mass, &b_primary_second_mass);
    fChain->SetBranchAddress("ParentEK1", &ParentEK1, &b_ParentEK1);
    fChain->SetBranchAddress("ParentEK2", &ParentEK2, &b_ParentEK2);
    fChain->SetBranchAddress("ParentEtot1", &ParentEtot1, &b_ParentEtot1);
@@ -546,4 +550,3 @@ Int_t missing::Cut(Long64_t entry)
    return 1;
 }
 #endif // #ifdef missing_cxx
-

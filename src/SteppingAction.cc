@@ -475,12 +475,15 @@ CreateTree::Instance()->ParentnonionEdep =theStep->GetNonIonizingEnergyDeposit()
         std::cout << "E lost: "<<thePrePoint->GetTotalEnergy() / GeV - thePostPoint->GetTotalEnergy() / GeV<<std::endl;
         std::cout << "GetTotalEnergyDeposit : "<<theStep->GetTotalEnergyDeposit() /GeV<<std::endl;
 //        std::cout << "**EK_pre: " << thePrePoint->GetKineticEnergy() / GeV<<" EK_post:"<<thePostPoint->GetKineticEnergy() / GeV << std::endl;
-        double sum_2Ek=0;
+        double sum_inci=0;
+        double sum_out=0;
         for (auto t = secondaries->begin(); t != secondaries->end(); t++) {
             CreateTree::Instance()->primary_second_id->push_back((*t)->GetParticleDefinition()->GetPDGEncoding());
             CreateTree::Instance()->primary_second_Ek->push_back((*t)->GetKineticEnergy()/GeV);
             CreateTree::Instance()->primary_second_Et->push_back((*t)->GetTotalEnergy()/ GeV);
-            sum_2Ek+=(*t)->GetKineticEnergy()/GeV;
+            CreateTree::Instance()->primary_second_mass->push_back((*t)->GetParticleDefinition()->GetPDGMass()/ GeV);
+            sum_out+=(*t)->GetTotalEnergy()/GeV;
+            sum_inci+=(*t)->GetParticleDefinition()->GetPDGMass()/ GeV;
 //            std::cout << "**"<<(*t)->GetParticleDefinition()->GetParticleName()
 //                       << " Etot: "<<(*t)->GetTotalEnergy()/GeV<<" Ek: "<<(*t)->GetKineticEnergy()/GeV//<<" p: "<<(*t)->GetMomentum()
                       //<<" v: "<<(*t)->GetVelocity()/299.792<<"c "<<" m: "<<  (*t)->GetParticleDefinition()->GetPDGMass()
@@ -489,8 +492,8 @@ CreateTree::Instance()->ParentnonionEdep =theStep->GetNonIonizingEnergyDeposit()
 //                      <<
 //                      <<std::endl;
         }
-        std::cout << "secondary Ek : "<<sum_2Ek<<std::endl;
-        std::cout << "GetTotalEnergyDeposit + secondary Ek : "<<theStep->GetTotalEnergyDeposit() /GeV+sum_2Ek<<std::endl;
+        std::cout << "incident : "<<sum_inci+thePrePoint->GetTotalEnergy() / GeV <<std::endl;
+        std::cout << " out: "<<sum_out+thePostPoint->GetTotalEnergy() / GeV<<std::endl;
 }
 
 

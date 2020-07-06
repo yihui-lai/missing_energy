@@ -54,6 +54,7 @@ float ParenttotEdep;
   std::vector<int> *primary_second_id;
   std::vector<float> *primary_second_Ek;
   std::vector<float> *primary_second_Et;
+  std::vector<float> *primary_second_mass;
 /*
   std::vector<float> *primary_Ek_Et_deuteron;
   std::vector<float> *primary_Ek_Et_alpha;

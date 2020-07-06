@@ -45,6 +45,7 @@ positionz_escape = new vector<float>;
 primary_second_id = new vector<int>;
 primary_second_Ek = new vector<float>;
 primary_second_Et = new vector<float>;
+primary_second_mass = new vector<float>;
 /*
 primary_Ek_Et_pip = new vector<float>(2,-99.);
 primary_Ek_Et_pin = new vector<float>(2,-99.);
@@ -67,6 +68,7 @@ primary_Ek_Et_other= new vector<float>(2,-99.);
   this->GetTree()->Branch("primary_second_id", "vector<int>", &primary_second_id);
   this->GetTree()->Branch("primary_second_Ek", "vector<float>", &primary_second_Ek);
   this->GetTree()->Branch("primary_second_Et", "vector<float>", &primary_second_Et);
+  this->GetTree()->Branch("primary_second_mass", "vector<float>", &primary_second_mass);
   this->GetTree()->Branch("ParentEK1", &this->ParentEK1, "ParentEK1/F");
   this->GetTree()->Branch("ParentEK2", &this->ParentEK2, "ParentEK2/F");
   this->GetTree()->Branch("ParentEtot1", &this->ParentEtot1, "ParentEtot1/F");
@@ -454,7 +456,7 @@ primary_Ek_Et_other->at(i)=-99;
 primary_second_id = new vector<int>;
 primary_second_Ek = new vector<float>;
 primary_second_Et = new vector<float>;
-
+primary_second_mass = new vector<float>;
   Event = 0;
 
   nTracksT1 = 0;

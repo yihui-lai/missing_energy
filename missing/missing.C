@@ -105,7 +105,8 @@ TH2F *hmissing2=new TH2F("hmissing2","hmissing2",700,-1,6, 700, -1, 6);
    double Eksum=0;
    double Etsum=0;
    double Eava=0;
-
+   double E_in=0;
+   double E_out=0;
    for (Long64_t jentry=0; jentry<nentries;jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
@@ -114,17 +115,22 @@ TH2F *hmissing2=new TH2F("hmissing2","hmissing2",700,-1,6, 700, -1, 6);
       Eksum=0;
       Etsum=0;
       Eava=0;
+      E_in=0;
+      E_out=0;
       for(int i=0;i<primary_second_id->size();i++){
         Eksum+=primary_second_Ek->at(i);
         Etsum+=primary_second_Et->at(i);
         if(primary_second_id->at(i)==111 || primary_second_id->at(i)==211 || primary_second_id->at(i)==-211 || primary_second_id->at(i)==130 || primary_second_id->at(i)==321 ||primary_second_id->at(i)==-321 ) Eava+=primary_second_Et->at(i);
         else Eava+=primary_second_Ek->at(i);
-
+        E_in += primary_second_mass->at(i); 
+        E_out += primary_second_Et->at(i); 
       }
+      E_in += ParentEtot1;
+      E_out += ParentEtot2;
+      
       string name;
       //if(Etsum<)
        //double Emaybedep=0;
-
        if(ParentEtot1!=-99){
       if(ParentEtot1 < Eava){
         cout<<"***********************************"<<endl;
@@ -148,8 +154,9 @@ TH2F *hmissing2=new TH2F("hmissing2","hmissing2",700,-1,6, 700, -1, 6);
            else      hmissing->Fill(ParentEtot1 - ParentEtot2, Eava);
        hmissing2->Fill(ParentEtot1 - ParentEtot2, (ParentEtot1 - ParentEtot2 - Eksum) / (ParentEtot1 - ParentEtot2));
        //if(ParentEK2==0)
-       if(ParentEK2==0) h_Elost->Fill( (ParentEtot1 - Eava ) / (ParentEtot1));
-       else h_Elost->Fill( (ParentEtot1-ParentEtot2 - Eava ) / (ParentEtot1-ParentEtot2));
+       h_Elost->Fill(E_in - E_out);
+       //if(ParentEK2==0) h_Elost->Fill( (ParentEtot1 - Eava ) / (ParentEtot1));
+       //else h_Elost->Fill( (ParentEtot1-ParentEtot2 - Eava ) / (ParentEtot1-ParentEtot2));
        //else h_Elost->Fill( (ParentEtot1-ParentEtot2 - Eksum) / (ParentEtot1-ParentEtot2));
        //h_Elost->Fill( (ParenttotEdep) / (ParentEtot1));
        }
